@@ -8,15 +8,18 @@
 
 #include <LiquidCrystal.h>
 
+#define MODE_IDLE     0
+#define MODE_FADE_RED 1
+#define NO_OF_MODES   2
+
 class ControlPanel
 {
 public:
-    enum OperationMode{ mIdle, mFadeRed, mNoOfModes};
     
     ControlPanel(LiquidCrystal *lcd);
     void updateControl();
     
-    OperationMode mode() const {return currentMode;}
+    byte mode() const {return currentMode;}
     
 private:
     enum Key{kNoKey, kUp, kDown, kRight, kLeft, kEnter};
@@ -29,8 +32,8 @@ private:
     char* currentModeText(bool inCapitals) const;
     
     Key            lastPressedKey;
-    OperationMode  currentMode;
-    OperationMode  preselectedMode;
+    byte           currentMode;
+    byte           preselectedMode;
     LiquidCrystal *display;
     
 };

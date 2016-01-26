@@ -5,7 +5,7 @@
 
 ControlPanel::ControlPanel(LiquidCrystal *lcd) :
     lastPressedKey(ControlPanel::kNoKey),
-    currentMode(mIdle),
+    currentMode(MODE_IDLE),
     display(lcd)
 {
   // set up the LCD's number of columns and rows:
@@ -54,7 +54,7 @@ ControlPanel::Key ControlPanel::readKey() const
 
 void ControlPanel::nextMode()
 {
-    if(preselectedMode < mNoOfModes - 1)
+    if(preselectedMode < NO_OF_MODES - 1)
         preselectedMode++;
 }
 
@@ -72,13 +72,13 @@ void ControlPanel::select()
 void ControlPanel::displayMode() const
 {
     char *modeText;
-    if(actualMode == preselectedMode)
+    if(currentMode == preselectedMode)
         modeText = currentModeText(true);
     else
         modeText = currentModeText(false);
     
-    lcd->setCursor(0,0);
-    lcd->print(modeText);
+    display->setCursor(0,0);
+    display->print(modeText);
 }
 
 char* ControlPanel::currentModeText(bool inCapitals) const
@@ -87,16 +87,16 @@ char* ControlPanel::currentModeText(bool inCapitals) const
     {
         switch(preselectedMode)
         {
-        case mIdle: return "";
-        case mFadeRed: return "fade red";
+        case MODE_IDLE: return "";
+        case MODE_FADE_RED: return "fade red";
         }
     }
     else
     {
         switch(preselectedMode)
         {
-        case mIdle: return "";
-        case mFadeRed: return "FADE RED";
+        case MODE_IDLE: return "";
+        case MODE_FADE_RED: return "FADE RED";
         }
     }
 }
