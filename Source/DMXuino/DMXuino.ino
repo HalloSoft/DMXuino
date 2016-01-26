@@ -16,6 +16,7 @@ void setup()
   resetChannels();
 
   Serial.begin(9600);
+  Serial.println("Scary Par");
   
   panel = new ControlPanel(&lcd);
   
@@ -27,27 +28,16 @@ void loop()
 {  
   panel->updateControl();
   
-  for(int channel = 2; channel <= 4; ++channel)
-  { 
-    resetChannels();
-    
-    for (int brightness = 0; brightness <= 255; brightness++) 
-    {  
-      /* Update DMX channel 1 to new brightness */
-      DmxSimple.write(channel, brightness);
-      Serial.println(brightness);
-      Serial.println("Here");
-      
-      /* Small delay to slow down the ramping */
-      delay(20);
-    }
-  }
   
   // End of the main-loop
   ++liveCounter;
   
   if(liveCounter == 0)
       ++cycles;
+
+  // Cycle delay
+  delay(5);
+  
 }
 
 void resetChannels()

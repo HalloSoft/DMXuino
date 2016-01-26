@@ -8,9 +8,10 @@
 
 #include <LiquidCrystal.h>
 
-#define MODE_IDLE     0
-#define MODE_FADE_RED 1
-#define NO_OF_MODES   2
+#define MODE_IDLE      0
+#define MODE_FADE_RED  1
+#define MODE_FADE_BLUE 2
+#define NO_OF_MODES    3
 
 class ControlPanel
 {
