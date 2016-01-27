@@ -8,10 +8,13 @@
 
 #include <LiquidCrystal.h>
 
-#define MODE_IDLE      0
-#define MODE_FADE_RED  1
-#define MODE_FADE_BLUE 2
-#define NO_OF_MODES    3
+#define MODE_IDLE       0
+#define MODE_FADE_RED   1
+#define MODE_FADE_GREEN 2
+#define MODE_FADE_BLUE  3
+#define NO_OF_MODES     4
+
+#define DELAYTIME 300 // ms
 
 class ControlPanel
 {
@@ -30,11 +33,15 @@ private:
     void previousMode();
     void select();
     void displayMode() const;
-    char* currentModeText(bool inCapitals) const;
+    void block();
+    void checkBlocking();
     
-    Key            lastPressedKey;
-    byte           currentMode;
-    byte           preselectedMode;
+    Key  lastPressedKey;
+    byte currentMode;
+    byte preselectedMode;
+    bool isBlocked;
+
+    unsigned long lastKeyEvent;
     LiquidCrystal *display;
     
 };

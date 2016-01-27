@@ -6,35 +6,47 @@
 ControlPanel::ControlPanel(LiquidCrystal *lcd) :
   lastPressedKey(ControlPanel::kNoKey),
   currentMode(MODE_IDLE),
+  preselectedMode(MODE_IDLE),
+  isBlocked(false),
   display(lcd)
 {
-  // set up the LCD's number of columns and rows:
-  display->begin(16, 2);
-  // Welcome message
-  display->setCursor(0, 0);
-  display->print("Welcome, this is");
-  display->setCursor(0, 1);
-  display->print("SCARY PAR   V0.1");
+    lastKeyEvent = millis();
+  
+    // set up the LCD's number of columns and rows:
+    display->begin(16, 2);
+  
+    // Welcome message
+    display->setCursor(0, 0);
+    display->print("Welcome, this is");
+    display->setCursor(0, 1);
+    display->print("SCARY PAR   V0.2");
 }
 
 void ControlPanel::updateControl()
 {
-  Key key = readKey();
+    if(!isBlocked)
+    {
+        Key key = readKey();
 
-  if ((key != lastPressedKey) && (key != kNoKey))
-  {
-    if (key == ControlPanel::kUp)
-      nextMode();
-    if (key == ControlPanel::kDown)
-      previousMode();
-    if (key == ControlPanel::kEnter)
-      select();
+        if (key != kNoKey)
+        {
+            if (key == ControlPanel::kUp)
+                nextMode();
+            if (key == ControlPanel::kDown)
+                previousMode();
+            if (key == ControlPanel::kEnter)
+                select();
 
-    displayMode();
-  }
-  // update last key
-  if (key != ControlPanel::kNoKey)
-    lastPressedKey = key;
+            displayMode();
+            block();
+        }
+        
+        // update last key
+        if (key != ControlPanel::kNoKey)
+            lastPressedKey = key;
+    }
+
+    checkBlocking();
 }
 
 ControlPanel::Key ControlPanel::readKey() const
@@ -78,45 +90,50 @@ void ControlPanel::select()
 {
   currentMode = preselectedMode;
   displayMode();
-
-  Serial.print(preselectedMode);
-  Serial.print(" ");
-  Serial.println(currentMode);
 }
 
 void ControlPanel::displayMode() const
 {
-  char *modeText;
-  if (currentMode == preselectedMode)
-    modeText = currentModeText(true);
-  else
-    modeText = currentModeText(false);
+    Serial.print(preselectedMode);
+    Serial.print(" ");
+    Serial.println(currentMode);
+  
+    display->setCursor(0, 0);
 
-  display->clear();
-  display->setCursor(0, 0);
-  display->print(modeText);
-  Serial.print("Text: ");
-  Serial.println(modeText);
+    if(preselectedMode == 0)
+        display->print("Black           ");
+  
+    if(preselectedMode == 1)
+        display->print("Fade red        ");
+
+    if(preselectedMode == 2)
+        display->print("Fade green      ");
+    
+    if(preselectedMode == 3)
+        display->print("Fade blue      ");
+
+    
+    display->setCursor(0, 1); // Goto second row
+    
+    if (preselectedMode == currentMode)
+        display->print("Selected        ");
+    else
+        display->print("                ");
+
+    
 }
 
-char* ControlPanel::currentModeText(bool inCapitals) const
+void ControlPanel::block()
 {
-  if (inCapitals)
-  {
-    switch (preselectedMode)
-    {
-      case MODE_IDLE:      return "IDLE";
-      case MODE_FADE_RED:  return "FADE RED";
-      case MODE_FADE_BLUE: return "FADE BLUE";
-    }
-  }
-  else
-  {
-    switch (preselectedMode)
-    {
-      case MODE_IDLE:      return "idle";
-      case MODE_FADE_RED:  return "fade red";
-      case MODE_FADE_BLUE: return "fade blue";
-    }
-  }
+    lastKeyEvent = millis();
+    isBlocked = true;
 }
+
+void ControlPanel::checkBlocking()
+{
+    unsigned long currentTime = millis();
+
+    if((currentTime - lastKeyEvent) > DELAYTIME)
+        isBlocked = false;  
+}
+
