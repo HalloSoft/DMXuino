@@ -1,6 +1,12 @@
-//
+// ---------------------------
+// Project: DMXuino
 // controlpanel.h
+// created 2016-02-01
+// HalloSoft
 //
+//------------------------------
+
+
 #ifndef CONTROLPANEL   
 #define CONTROLPANEL
 
@@ -12,7 +18,7 @@
 #define MODE_FADE_RED   1
 #define MODE_FADE_GREEN 2
 #define MODE_FADE_BLUE  3
-#define NO_OF_MODES     4
+#define NUMBER_OF_MODES 4
 
 #define DELAYTIME 300 // ms
 

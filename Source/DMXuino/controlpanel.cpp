@@ -1,6 +1,12 @@
-//
+
+// ---------------------------
+// Project: DMXuino
 // controlpanel.cpp
+// created 2016-02-01
+// HalloSoft
 //
+//------------------------------
+
 #include "controlpanel.h"
 
 ControlPanel::ControlPanel(LiquidCrystal *lcd) :
@@ -62,21 +68,21 @@ ControlPanel::Key ControlPanel::readKey() const
   else if (inValue < 850)  pressedKey = kEnter;
 
   // Debug
-  if (pressedKey != lastPressedKey)
-  {
-    if (pressedKey == kRight) Serial.println("Key Right");
-    if (pressedKey == kUp)    Serial.println("Key Up");
-    if (pressedKey == kDown)  Serial.println("Key Down");
-    if (pressedKey == kLeft)  Serial.println("Key Left");
-    if (pressedKey == kEnter) Serial.println("Enter");
-  }
+//  if (pressedKey != lastPressedKey)
+//  {
+//    if (pressedKey == kRight) Serial.println("Key Right");
+//    if (pressedKey == kUp)    Serial.println("Key Up");
+//    if (pressedKey == kDown)  Serial.println("Key Down");
+//    if (pressedKey == kLeft)  Serial.println("Key Left");
+//    if (pressedKey == kEnter) Serial.println("Enter");
+//  }
 
   return pressedKey;
 }
 
 void ControlPanel::nextMode()
 {
-  if (preselectedMode < NO_OF_MODES - 1)
+  if (preselectedMode < NUMBER_OF_MODES - 1)
     preselectedMode++;
 }
 
@@ -94,10 +100,9 @@ void ControlPanel::select()
 
 void ControlPanel::displayMode() const
 {
-    Serial.print(preselectedMode);
-    Serial.print(" ");
-    Serial.println(currentMode);
-  
+//    Serial.print(preselectedMode);
+//    Serial.print(" ");
+//    Serial.println(currentMode);  
     display->setCursor(0, 0);
 
     if(preselectedMode == 0)

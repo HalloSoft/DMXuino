@@ -1,11 +1,20 @@
+// ---------------------------
+// Project: DMXuino
+// DMXuino.ino
+// created 2016-02-01
+// HalloSoft
+//
+//------------------------------
 
 #include <DmxSimple.h>
 #include <LiquidCrystal.h>
+
 #include "controlpanel.h"
+#include "programs.h"
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 ControlPanel *panel;
-int liveCounter;
+unsigned int liveCounter;
 byte cycles;
 
 void setup()
@@ -25,17 +34,37 @@ void setup()
 
 void loop()
 {
-  panel->updateControl();
+    // End of the main-loop
+    ++liveCounter;
+    panel->updateControl();
 
+    if (liveCounter == 0)
+        ++cycles;
 
-  // End of the main-loop
-  ++liveCounter;
+    if(panel->mode() == MODE_IDLE)
+        
+        
+    if(panel->mode() == MODE_FADE_RED)
+        runFadeRedMode(liveCounter);
 
-  if (liveCounter == 0)
-    ++cycles;
+    switch(panel->mode())
+    {
+    case MODE_IDLE:
+        runBlackMode(liveCounter);
+        break;
+    case MODE_FADE_RED:
+        runFadeRedMode(liveCounter);
+        break;
+    case MODE_FADE_GREEN:
+        runFadeGreenMode(liveCounter);
+        break;
+    case MODE_FADE_BLUE:
+        runFadeBlueMode(liveCounter);
+        break;    
+    }
 
-  // Cycle delay
-  delay(5);
+    // Cycle delay
+    delay(1);
 
 }
 
