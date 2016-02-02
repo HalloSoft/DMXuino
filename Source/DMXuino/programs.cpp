@@ -24,13 +24,13 @@ void runBlackMode(unsigned int counter)
 {
     if(counter%50 == 0)
     {
-        Serial.println("Black Mode");
+//        Serial.println("Black Mode");
         
-      DmxSimple.write(1, 0);
-      DmxSimple.write(2, 0);
-      DmxSimple.write(3, 0);
-      DmxSimple.write(4, 0);
-      DmxSimple.write(5, 0);
+        DmxSimple.write(1, 0);
+        DmxSimple.write(2, 0);
+        DmxSimple.write(3, 0);
+        DmxSimple.write(4, 0);
+        DmxSimple.write(5, 0);
     }
 }
 
@@ -65,6 +65,33 @@ void runFadeBlueMode(unsigned int counter)
 //        Serial.println("Fade Blue Mode");
 }
 
+void runStroboRedMode(unsigned int counter)
+{   
+    int value = calculateStroboValue(counter);
+    DmxSimple.write(2, value);
+    DmxSimple.write(3, 0);
+    DmxSimple.write(4, 0);
+    
+}
+
+void runStroboGreenMode(unsigned int counter)
+{   
+    int value = calculateStroboValue(counter);
+    DmxSimple.write(2, 0);
+    DmxSimple.write(3, value);
+    DmxSimple.write(4, 0);
+    
+}
+
+void runStroboBlueMode(unsigned int counter)
+{   
+    int value = calculateStroboValue(counter);
+    DmxSimple.write(2, 0);
+    DmxSimple.write(3, 0);
+    DmxSimple.write(4, value);
+    
+}
+
 // Helper
 int calculateFadeValue(unsigned int counter)
 {
@@ -93,6 +120,19 @@ int calculateFadeValue(unsigned int counter)
     }
 
     return fadeValue;
+}
+
+int calculateStroboValue(unsigned int counter)
+{
+    const int stroboTime =  3; // in cycles
+
+    int stroboCounter = counter % (2 * stroboTime);
+
+    int value = 0; 
+    if(stroboCounter > stroboTime * 1.5)
+        value = 255;
+
+    return value;
 }
 
 

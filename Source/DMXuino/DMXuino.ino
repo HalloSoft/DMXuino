@@ -56,6 +56,15 @@ void loop()
     case MODE_FADE_BLUE:
         runFadeBlueMode(liveCounter);
         break;    
+    case MODE_STROBO_RED:
+        runStroboRedMode(liveCounter);
+        break;
+    case MODE_STROBO_GREEN:
+        runStroboGreenMode(liveCounter);
+        break;
+    case MODE_STROBO_BLUE:
+        runStroboBlueMode(liveCounter);
+        break;
     }
 
 

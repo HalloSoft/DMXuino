@@ -115,8 +115,16 @@ void ControlPanel::displayMode() const
         display->print("Fade green      ");
     
     if(preselectedMode == 3)
-        display->print("Fade blue      ");
+        display->print("Fade blue       ");
+        
+    if(preselectedMode == 4)
+        display->print("Strobo red      ");
 
+    if(preselectedMode == 5)
+        display->print("Strobo green    ");
+
+    if(preselectedMode == 6)
+        display->print("Strobo blue     ");
     
     display->setCursor(0, 1); // Goto second row
     
