@@ -17,6 +17,8 @@ ControlPanel *panel;
 unsigned int liveCounter;
 byte cycles;
 
+unsigned long lastTimeStamp = 0;
+
 void setup()
 {
   DmxSimple.usePin(2);
@@ -34,18 +36,11 @@ void setup()
 
 void loop()
 {
-    // End of the main-loop
-    ++liveCounter;
     panel->updateControl();
 
     if (liveCounter == 0)
         ++cycles;
 
-    if(panel->mode() == MODE_IDLE)
-        
-        
-    if(panel->mode() == MODE_FADE_RED)
-        runFadeRedMode(liveCounter);
 
     switch(panel->mode())
     {
@@ -63,16 +58,21 @@ void loop()
         break;    
     }
 
+
+    // End of the main-loop
+    ++liveCounter;
+    
     // Cycle delay
-    delay(1);
+    delay(20);
+
+    // Measureing time
+//    unsigned long currentTimeStamp = millis();
+//    unsigned long loopTime = currentTimeStamp - lastTimeStamp;
+//    lastTimeStamp = currentTimeStamp; 
+//    Serial.print("Looptime :");
+//    Serial.print(loopTime);
+//    Serial.println(" ms");
 
 }
 
-void resetChannels()
-{
-  DmxSimple.write(1, 0);
-  DmxSimple.write(2, 0);
-  DmxSimple.write(3, 0);
-  DmxSimple.write(4, 0);
-  DmxSimple.write(5, 0);
-}
+

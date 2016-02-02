@@ -9,8 +9,12 @@
 
 #include "Arduino.h"
 
+void resetChannels();
 void runBlackMode(unsigned int counter);
 void runFadeRedMode(unsigned int counter);
 void runFadeGreenMode(unsigned int counter);
 void runFadeBlueMode(unsigned int counter);
+
+// Helper
+int calculateFadeValue(unsigned int counter);
 
