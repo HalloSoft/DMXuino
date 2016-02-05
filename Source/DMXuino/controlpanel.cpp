@@ -125,6 +125,9 @@ void ControlPanel::displayMode() const
 
     if(preselectedMode == 6)
         display->print("Strobo blue     ");
+
+    if(preselectedMode == 7)
+        display->print("ColorWheel      ");
     
     display->setCursor(0, 1); // Goto second row
     

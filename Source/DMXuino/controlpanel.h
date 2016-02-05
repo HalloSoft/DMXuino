@@ -21,7 +21,8 @@
 #define MODE_STROBO_RED   4
 #define MODE_STROBO_GREEN 5
 #define MODE_STROBO_BLUE  6
-#define NUMBER_OF_MODES   7 // <-- Here number of modes
+#define MODE_COLORWHEEL   7
+#define NUMBER_OF_MODES   8 // <-- Here number of modes
 
 #define DELAYTIME 300 // ms
 

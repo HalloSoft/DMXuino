@@ -11,6 +11,7 @@
 
 #include "controlpanel.h"
 #include "programs.h"
+#include "colorwheel.h"
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 ControlPanel *panel;
@@ -64,6 +65,9 @@ void loop()
         break;
     case MODE_STROBO_BLUE:
         runStroboBlueMode(liveCounter);
+        break;
+    case MODE_COLORWHEEL:
+        runColorWheelMode(liveCounter);
         break;
     }
 

@@ -7,6 +7,9 @@
 //
 //------------------------------
 
+#ifndef PROGRAMS   
+#define PROGRAMS
+
 #include "Arduino.h"
 
 void resetChannels();
@@ -21,4 +24,6 @@ void runStroboBlueMode(unsigned int counter);
 // Helper
 int calculateFadeValue(unsigned int counter);
 int calculateStroboValue(unsigned int counter);
+
+#endif
 
