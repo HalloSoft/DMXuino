@@ -128,6 +128,12 @@ void ControlPanel::displayMode() const
 
     if(preselectedMode == 7)
         display->print("ColorWheel      ");
+
+    if(preselectedMode == 8)
+        display->print("ColorWheel fast ");
+
+    if(preselectedMode == 9)
+        display->print("ColorWheel slow ");
     
     display->setCursor(0, 1); // Goto second row
     

@@ -14,15 +14,17 @@
 
 #include <LiquidCrystal.h>
 
-#define MODE_IDLE         0
-#define MODE_FADE_RED     1
-#define MODE_FADE_GREEN   2
-#define MODE_FADE_BLUE    3
-#define MODE_STROBO_RED   4
-#define MODE_STROBO_GREEN 5
-#define MODE_STROBO_BLUE  6
-#define MODE_COLORWHEEL   7
-#define NUMBER_OF_MODES   8 // <-- Here number of modes
+#define MODE_IDLE             0
+#define MODE_FADE_RED         1
+#define MODE_FADE_GREEN       2
+#define MODE_FADE_BLUE        3
+#define MODE_STROBO_RED       4
+#define MODE_STROBO_GREEN     5
+#define MODE_STROBO_BLUE      6
+#define MODE_COLORWHEEL       7
+#define MODE_COLORWHEEL_FAST  8
+#define MODE_COLORWHEEL_SLOW  9
+#define NUMBER_OF_MODES      10 // <-- Here number of modes
 
 #define DELAYTIME 300 // ms
 

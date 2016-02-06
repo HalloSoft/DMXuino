@@ -67,7 +67,13 @@ void loop()
         runStroboBlueMode(liveCounter);
         break;
     case MODE_COLORWHEEL:
-        runColorWheelMode(liveCounter);
+        runColorWheelMode(liveCounter, 4096);
+        break;
+    case MODE_COLORWHEEL_FAST:
+        runColorWheelMode(liveCounter, 128);
+        break;
+    case MODE_COLORWHEEL_SLOW:
+        runColorWheelMode(liveCounter, 16384);
         break;
     }
 

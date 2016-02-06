@@ -11,9 +11,10 @@
 
 int sectionSize = 1; 
 
-void runColorWheelMode(unsigned int counter)
+void runColorWheelMode(unsigned int counter, unsigned int modulo)
 {
-    unsigned int wheelCounter = counter % 512; // Maybe scale time here
+    //const int modulo = 4096; // should be 2^x -- higher values, longer cycle
+    unsigned int wheelCounter = counter % modulo; // Maybe scale time here
 
     Serial.print("Wheelcounter:");
     Serial.print(wheelCounter);
@@ -21,7 +22,7 @@ void runColorWheelMode(unsigned int counter)
     
 
     //int sectionSize = 65535 / 6;
-    sectionSize = 512 / 6;
+    sectionSize = modulo / 6;
 
     if(wheelCounter < sectionSize)
         runSectionA(wheelCounter);
@@ -40,14 +41,14 @@ void runColorWheelMode(unsigned int counter)
 
     if(wheelCounter >= sectionSize * 5)
         runSectionF(wheelCounter);
-         
-    
+          
 }
 
 
 void runSectionA(unsigned int counter)
 {
-    int value = 255  * counter / sectionSize;
+    int value = 255l  * counter / sectionSize;
+    value = correctBorders(value);
     
     DmxSimple.write(BLUE,      0);
     DmxSimple.write(RED,     255);
@@ -62,6 +63,7 @@ void runSectionA(unsigned int counter)
 void runSectionB(unsigned int counter)
 {
     long value = (-255l)  * counter / sectionSize + 2 * 255;
+    value = correctBorders(value);
 
     DmxSimple.write(GREEN, 255);
     DmxSimple.write(BLUE,    0);
@@ -69,15 +71,14 @@ void runSectionB(unsigned int counter)
 
     Serial.print("Sectoin B - ");
 
-    Serial.print("sectionsize; ");
-    Serial.print(sectionSize);
     Serial.print("Red: ");
     Serial.println(value);
 }
 
 void runSectionC(unsigned int counter)
 {
-    int value = 255  * counter / sectionSize - 2 * 255;
+    int value = 255l  * counter / sectionSize - 2 * 255;
+    value = correctBorders(value);
 
     DmxSimple.write(GREEN, 255);
     DmxSimple.write(BLUE, value);
@@ -90,21 +91,53 @@ void runSectionC(unsigned int counter)
 
 void runSectionD(unsigned int counter)
 {
+    int value = -255l  * counter / sectionSize + 4 * 255;
+    value = correctBorders(value);
+   
+    DmxSimple.write(BLUE,   255);
+    DmxSimple.write(RED,      0);
+    DmxSimple.write(GREEN,value); 
+    
     Serial.print("Sectoin D - ");
-    Serial.println();
+    Serial.print("Green: ");
+    Serial.println(value);
 }
 
 void runSectionE(unsigned int counter)
 {
+    int value =  255l  * counter / sectionSize - 4 * 255;
+    value = correctBorders(value);
+    
+    DmxSimple.write(GREEN,   0);
+    DmxSimple.write(BLUE,  255);
+    DmxSimple.write(RED, value);
+    
     Serial.print("Sectoin E - ");
-    Serial.println();
+    Serial.print("Red: ");
+    Serial.println(value);
     
 }
 
 void runSectionF(unsigned int counter)
 {
-    Serial.print("Sectoin F - ");
-    Serial.println();
+    int value =  -255l  * counter / sectionSize + 6 * 255;
+
+    value = correctBorders(value); 
+
+    DmxSimple.write(GREEN,    0);
+    DmxSimple.write(RED,    255);
+    DmxSimple.write(BLUE, value);
     
+    Serial.print("Sectoin F - ");
+    Serial.print("Blue: ");
+    Serial.println(value);
+}
+
+int correctBorders(int value) 
+{
+    value = value < 0 ? 0 : value;
+    value = value > 255 ? 255 : value;
+    
+    return value;
 }
 
