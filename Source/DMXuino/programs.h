@@ -10,6 +10,10 @@
 #ifndef PROGRAMS   
 #define PROGRAMS
 
+#define RED   2
+#define GREEN 3
+#define BLUE  4
+
 #include "Arduino.h"
 
 void resetChannels();
@@ -20,6 +24,7 @@ void runFadeBlueMode(unsigned int counter);
 void runStroboRedMode(unsigned int counter);
 void runStroboGreenMode(unsigned int counter);
 void runStroboBlueMode(unsigned int counter);
+void runStroboWhiteMode(unsigned int counter);
 
 // Helper
 int calculateFadeValue(unsigned int counter);

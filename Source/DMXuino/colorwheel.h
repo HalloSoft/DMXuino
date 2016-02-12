@@ -15,7 +15,7 @@
 
 #include "Arduino.h"
 
-void runColorWheelMode(unsigned int counter, unsigned int modulo);
+void runColorWheelMode(unsigned int counter, unsigned int modulo, bool strobo = false);
 
 //helper
 void runSectionA(unsigned int counter);
@@ -24,5 +24,7 @@ void runSectionC(unsigned int counter);
 void runSectionD(unsigned int counter);
 void runSectionE(unsigned int counter);
 void runSectionF(unsigned int counter);
+bool calculateStroboOn(unsigned int counter);
 int  correctBorders(int value);
-#endif
+
+#endif //COLORWHEEL

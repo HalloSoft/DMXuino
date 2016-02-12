@@ -109,13 +109,13 @@ void ControlPanel::displayMode() const
         display->print("Black           ");
   
     if(preselectedMode == 1)
-        display->print("Fade red        ");
+        display->print("Color-Strobo    ");
 
     if(preselectedMode == 2)
-        display->print("Fade green      ");
+        display->print("White           ");
     
     if(preselectedMode == 3)
-        display->print("Fade blue       ");
+        display->print("Strobo white    ");
         
     if(preselectedMode == 4)
         display->print("Strobo red      ");

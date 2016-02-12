@@ -12,6 +12,9 @@
 #include "controlpanel.h"
 #include "programs.h"
 #include "colorwheel.h"
+#include "staticlight.h"
+
+
 
 LiquidCrystal lcd(8, 9, 4, 5, 6, 7);
 ControlPanel *panel;
@@ -48,14 +51,14 @@ void loop()
     case MODE_IDLE:
         runBlackMode(liveCounter);
         break;
-    case MODE_FADE_RED:
-        runFadeRedMode(liveCounter);
+    case MODE_COLORSTROBO:
+        runColorWheelMode(liveCounter, 4096, true);
         break;
-    case MODE_FADE_GREEN:
-        runFadeGreenMode(liveCounter);
+    case MODE_STATIC_WHITE:
+        staticWhiteMode(liveCounter);
         break;
-    case MODE_FADE_BLUE:
-        runFadeBlueMode(liveCounter);
+    case MODE_FADE_WHITE:
+        runStroboWhiteMode(liveCounter);
         break;    
     case MODE_STROBO_RED:
         runStroboRedMode(liveCounter);
