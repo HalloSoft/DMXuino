@@ -37,11 +37,14 @@ void rgbStoboMode(unsigned int counter)
     DmxSimple.write(GREEN, greenValue);
     DmxSimple.write(BLUE,  blueValue);
 
-    if(counter % 3 == 0)
+    byte stroboCounter = counter % 5;
+    if(stroboCounter == 0)
     {
+        lightIsOn = true;
         flashColor = nextFlashColor(flashColor);
-        lightIsOn = !lightIsOn;
     }
+    else
+        lightIsOn = false;
 }
 
 byte nextFlashColor(byte currentColor)
