@@ -25,7 +25,7 @@ ControlPanel::ControlPanel(LiquidCrystal *lcd) :
     display->setCursor(0, 0);
     display->print("Welcome, this is");
     display->setCursor(0, 1);
-    display->print("SCARY PAR   V0.2");
+    display->print("SCARY PAR   V0.3");
 }
 
 void ControlPanel::updateControl()
@@ -109,31 +109,46 @@ void ControlPanel::displayMode() const
         display->print("Black           ");
   
     if(preselectedMode == 1)
-        display->print("Color-Strobo    ");
+        display->print("White           ");
 
     if(preselectedMode == 2)
-        display->print("White           ");
+        display->print("Red             ");
     
     if(preselectedMode == 3)
-        display->print("Strobo white    ");
+        display->print("Yellow          ");
         
     if(preselectedMode == 4)
-        display->print("Strobo red      ");
+        display->print("Green           ");
 
     if(preselectedMode == 5)
-        display->print("Strobo green    ");
+        display->print("Cyan            ");
 
     if(preselectedMode == 6)
-        display->print("Strobo blue     ");
+        display->print("Blue            ");
 
     if(preselectedMode == 7)
-        display->print("ColorWheel      ");
+        display->print("Purple          ");
 
     if(preselectedMode == 8)
-        display->print("ColorWheel fast ");
+        display->print("ColorWheel slow ");
 
     if(preselectedMode == 9)
-        display->print("ColorWheel slow ");
+        display->print("ColorWheel norm ");
+
+    if(preselectedMode == 10)
+        display->print("ColorWheel fast ");
+
+    if(preselectedMode == 11)
+        display->print("Red Strobo      ");
+
+    if(preselectedMode == 12)
+        display->print("Green Strobo    ");
+
+    if(preselectedMode == 13)
+        display->print("Blue Strobo     ");
+
+    if(preselectedMode == 14)
+        display->print("Color Strobo    ");
     
     display->setCursor(0, 1); // Goto second row
     

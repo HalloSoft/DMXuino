@@ -51,15 +51,36 @@ void loop()
     case MODE_IDLE:
         runBlackMode(liveCounter);
         break;
-    case MODE_COLORSTROBO:
-        runColorWheelMode(liveCounter, 4096, true);
-        break;
     case MODE_STATIC_WHITE:
         staticWhiteMode(liveCounter);
         break;
-    case MODE_FADE_WHITE:
-        runStroboWhiteMode(liveCounter);
+    case MODE_STATIC_RED:
+        staticRedMode(liveCounter);
+        break;
+    case MODE_STATIC_YELLOW:
+        staticYellowMode(liveCounter);
         break;    
+    case MODE_STATIC_GREEN:
+        staticGreenMode(liveCounter);
+        break;
+    case MODE_STATIC_CYAN:
+        staticCyanMode(liveCounter);
+        break;
+    case MODE_STATIC_BLUE:
+        staticBlueMode(liveCounter);
+        break;
+    case MODE_STATIC_PURPLE:
+        staticPurpleMode(liveCounter);
+        break;
+    case MODE_COLORWHEEL_SLOW:
+        runColorWheelMode(liveCounter, 16384);
+        break;
+    case MODE_COLORWHEEL_NORMAL:
+        runColorWheelMode(liveCounter, 4096);
+        break;
+    case MODE_COLORWHEEL_FAST:
+        runColorWheelMode(liveCounter, 128);
+        break;
     case MODE_STROBO_RED:
         runStroboRedMode(liveCounter);
         break;
@@ -69,14 +90,8 @@ void loop()
     case MODE_STROBO_BLUE:
         runStroboBlueMode(liveCounter);
         break;
-    case MODE_COLORWHEEL:
-        runColorWheelMode(liveCounter, 4096);
-        break;
-    case MODE_COLORWHEEL_FAST:
-        runColorWheelMode(liveCounter, 128);
-        break;
-    case MODE_COLORWHEEL_SLOW:
-        runColorWheelMode(liveCounter, 16384);
+    case MODE_COLORSTROBO:
+        runColorWheelMode(liveCounter, 4096, true);
         break;
     }
 
