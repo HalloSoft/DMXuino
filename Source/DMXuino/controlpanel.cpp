@@ -25,7 +25,7 @@ ControlPanel::ControlPanel(LiquidCrystal *lcd) :
     display->setCursor(0, 0);
     display->print("Welcome, this is");
     display->setCursor(0, 1);
-    display->print("SCARY PAR   V0.3");
+    display->print("SCARY PAR   V0.4");
 }
 
 void ControlPanel::updateControl()
@@ -149,6 +149,9 @@ void ControlPanel::displayMode() const
 
     if(preselectedMode == 14)
         display->print("Color Strobo    ");
+
+    if(preselectedMode == 15)
+        display->print("Color Strobo RGB");
     
     display->setCursor(0, 1); // Goto second row
     

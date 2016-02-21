@@ -13,6 +13,7 @@
 #include "programs.h"
 #include "colorwheel.h"
 #include "staticlight.h"
+#include "strobomodes.h"
 
 
 
@@ -92,6 +93,9 @@ void loop()
         break;
     case MODE_COLORSTROBO:
         runColorWheelMode(liveCounter, 4096, true);
+        break;
+    case MODE_COLORSTROBO2:
+        rgbStoboMode(liveCounter);
         break;
     }
 

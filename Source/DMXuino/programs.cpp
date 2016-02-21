@@ -87,7 +87,7 @@ void runStroboBlueMode(unsigned int counter)
     int value = calculateStroboValue(counter);
     DmxSimple.write(RED, 0);
     DmxSimple.write(GREEN, 0);
-    DmxSimple.write(4, value);
+    DmxSimple.write(BLUE, value);
     
 }
 
@@ -96,7 +96,7 @@ void runStroboWhiteMode(unsigned int counter)
     int value = calculateStroboValue(counter);
     DmxSimple.write(RED, value);
     DmxSimple.write(GREEN, value);
-    DmxSimple.write(4, value);
+    DmxSimple.write(BLUE, value);
     
 }
 
